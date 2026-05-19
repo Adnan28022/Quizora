@@ -60,12 +60,19 @@ const Navbar = () => {
 
                     {/* ACTION BUTTONS */}
                     <div className="hidden lg:flex items-center gap-4">
-                        <button className="px-5 py-2 text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">
-                            Login
-                        </button>
-                        <button className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-indigo-600 transition-all shadow-lg shadow-indigo-200 flex items-center gap-2">
-                            Get Started <ArrowRight size={16} />
-                        </button>
+
+                        <Link to="/auth/login">
+                            <button className="px-5 py-2 text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">
+                                Login
+                            </button>
+                        </Link>
+
+                        <Link to="/auth/signup">
+                            <button className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-indigo-600 transition-all shadow-lg shadow-indigo-200 flex items-center gap-2">
+                                Get Started <ArrowRight size={16} />
+                            </button>
+                        </Link>
+
                     </div>
 
                     {/* MOBILE TOGGLER */}

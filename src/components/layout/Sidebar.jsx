@@ -1,0 +1,92 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+    LayoutDashboard, BookOpen, Trophy, History,
+    User, Settings, LogOut, GraduationCap,
+    Star, Target, HelpCircle, X
+} from 'lucide-react';
+
+const StudentSidebar = ({ isCollapsed, isMobile, setMobileSidebar }) => {
+    const studentMenu = [
+        { name: "Overview", path: "/student/dashboard", icon: <LayoutDashboard size={18} /> },
+        { name: "Available Quizzes", path: "/student/quizzes", icon: <BookOpen size={18} /> },
+        { name: "My Results", path: "/student/results", icon: <History size={18} /> },
+        { name: "Leaderboard", path: "/student/leaderboard", icon: <Trophy size={18} /> },
+        { name: "Achievements", path: "/student/awards", icon: <Star size={18} /> },
+        { name: "Profile", path: "/student/profile", icon: <User size={18} /> },
+        { name: "Settings", path: "/student/settings", icon: <Settings size={18} /> },
+    ];
+
+    return (
+        <motion.aside
+            animate={{ width: isCollapsed ? 85 : 280 }}
+            transition={{ duration: 0.4, ease: "circOut" }}
+            className="h-screen bg-[#0f172a] text-white flex flex-col sticky top-0 left-0 z-50 overflow-hidden shadow-2xl border-r border-white/5"
+        >
+            {/* Brand Logo */}
+            <div className="p-6 h-20 flex items-center justify-between gap-3 shrink-0">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20">
+                        <GraduationCap size={22} className="text-white" />
+                    </div>
+                    {!isCollapsed && (
+                        <motion.span
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                            className="text-xl font-black italic tracking-tighter uppercase"
+                        >
+                            Quiz<span className="text-indigo-500">ora</span>
+                        </motion.span>
+                    )}
+                </div>
+                {isMobile && (
+                    <button onClick={() => setMobileSidebar(false)} className="p-2 text-slate-400 hover:text-white">
+                        <X size={24} />
+                    </button>
+                )}
+            </div>
+
+            {/* Navigation */}
+            <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto no-scrollbar">
+                {!isCollapsed && (
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-4 ml-2 opacity-50 italic">Learning Portal</p>
+                )}
+                {studentMenu.map((item) => (
+                    <NavLink
+                        key={item.name}
+                        to={item.path}
+                        onClick={() => isMobile && setMobileSidebar(false)}
+                        className={({ isActive }) => `
+                            flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group relative
+                            ${isActive
+                                ? 'bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-500/20'
+                                : 'text-slate-400 hover:bg-white/5 hover:text-white'}
+                        `}
+                    >
+                        <div className="shrink-0 transition-transform group-hover:scale-110">{item.icon}</div>
+                        {!isCollapsed && (
+                            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[13px] font-semibold tracking-wide">
+                                {item.name}
+                            </motion.span>
+                        )}
+                        {isCollapsed && !isMobile && (
+                            <div className="absolute left-full ml-6 px-3 py-2 bg-slate-800 text-white text-[11px] font-bold rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-all z-50 shadow-2xl border border-slate-700">
+                                {item.name}
+                            </div>
+                        )}
+                    </NavLink>
+                ))}
+            </nav>
+
+            {/* Logout Footer */}
+            <div className="p-4 border-t border-white/5 bg-slate-950/20 shrink-0">
+                <button className={`flex items-center gap-4 w-full px-4 py-3 rounded-xl text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-all group relative ${isCollapsed && !isMobile ? 'justify-center' : ''}`}>
+                    <LogOut size={20} className="shrink-0 group-hover:rotate-12 transition-transform" />
+                    {!isCollapsed && <span className="text-[13px] font-black uppercase tracking-widest leading-none">Terminate Session</span>}
+                </button>
+            </div>
+        </motion.aside>
+    );
+};
+
+export default StudentSidebar;
