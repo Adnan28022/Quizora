@@ -22,6 +22,10 @@ import VerifyOTP from '../auth/VerifyOTP';
 import ResetPassword from '../auth/ResetPassword';
 import TeacherLayout from '../layout/TeacherLayout';
 import TeacherDashboard from '../pages/teacher/Dashboard';
+import CreateQuiz from '../pages/teacher/CreateQuiz';
+import ManageQuizzes from '../pages/teacher/ManageQuizzes';
+import StudentProgress from '../pages/teacher/StudentProgress';
+import MyStudents from '../pages/teacher/MyStudents';
 const Layout = () => {
     return (
         <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0f1a] transition-colors duration-500">
@@ -61,12 +65,14 @@ const AppRoutes = () => {
                 </Route>
                 <Route path="/teacher" element={<TeacherLayout />}>
                     <Route path="dashboard" element={<TeacherDashboard />} />
-                    <Route path="create-quiz" element={<div>Create Quiz Component</div>} />
-                    <Route path="manage-quizzes" element={<div>Manage Quizzes Component</div>} />
+                    <Route path="create-quiz" element={<CreateQuiz />} />
+                    <Route path="manage-quizzes" element={<ManageQuizzes />} />
+                    <Route path='analytics' element={<StudentProgress />} />
+                    <Route path='students' element={<MyStudents />} />
                     {/* ... baki routes */}
                 </Route>
                 <Route path='*' element={<NotFound />} />
-            </Routes>
+            </Routes >
         </>
     );
 };
