@@ -114,12 +114,19 @@ const Navbar = () => {
                         </div>
 
                         <div className="mt-auto flex flex-col gap-4">
-                            <button className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl shadow-xl shadow-indigo-100">
-                                SIGN UP FREE
-                            </button>
-                            <button className="w-full py-5 border-2 border-slate-100 rounded-2xl font-bold text-slate-500 text-xl">
-                                LOG IN
-                            </button>
+
+                            <Link to="/signup">
+                                <button className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl shadow-xl shadow-indigo-100">
+                                    SIGN UP FREE
+                                </button>
+                            </Link>
+
+                            <Link to="/login">
+                                <button className="w-full py-5 border-2 border-slate-100 rounded-2xl font-bold text-slate-500 text-xl">
+                                    LOG IN
+                                </button>
+                            </Link>
+
                         </div>
                     </motion.div>
                 )}
