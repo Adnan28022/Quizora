@@ -26,6 +26,8 @@ import CreateQuiz from '../pages/teacher/CreateQuiz';
 import ManageQuizzes from '../pages/teacher/ManageQuizzes';
 import StudentProgress from '../pages/teacher/StudentProgress';
 import MyStudents from '../pages/teacher/MyStudents';
+import TeacherFeedback from '../pages/teacher/Feedback';
+import TeacherProfile from '../pages/teacher/Profile';
 const Layout = () => {
     return (
         <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0f1a] transition-colors duration-500">
@@ -69,7 +71,8 @@ const AppRoutes = () => {
                     <Route path="manage-quizzes" element={<ManageQuizzes />} />
                     <Route path='analytics' element={<StudentProgress />} />
                     <Route path='students' element={<MyStudents />} />
-                    {/* ... baki routes */}
+                    <Route path='feedback' element={<TeacherFeedback />} />
+                    <Route path='settings' element={<TeacherProfile />} />
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes >
