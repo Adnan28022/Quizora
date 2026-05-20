@@ -28,6 +28,12 @@ import StudentProgress from '../pages/teacher/StudentProgress';
 import MyStudents from '../pages/teacher/MyStudents';
 import TeacherFeedback from '../pages/teacher/Feedback';
 import TeacherProfile from '../pages/teacher/Profile';
+import AdminLayout from '../layout/AdminLayout';
+import AdminDashboard from '../pages/admin/Dashboard';
+import ManageUsers from '../pages/admin/ManageUsers';
+import QuizApprovals from '../pages/admin/QuizApprovals';
+import PlatformAnalytics from '../pages/admin/PlatefornAnalytics';
+import ManageTeachers from '../pages/admin/ManageTeachers'
 const Layout = () => {
     return (
         <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0f1a] transition-colors duration-500">
@@ -64,6 +70,14 @@ const AppRoutes = () => {
                     <Route path='awards' element={<Achievements />} />
                     <Route path='profile' element={<Profile />} />
                     <Route path='settings' element={<Settings />} />
+                </Route>
+                {/* ADMIN DASHBOARD ROUTES */}
+                <Route path="/admin" element={<AdminLayout />}>
+                    <Route path="dashboard" element={<AdminDashboard />} />
+                    <Route path="users" element={<ManageUsers />} />
+                    <Route path="approvals" element={<QuizApprovals />} />
+                    <Route path="analytics" element={<PlatformAnalytics />} />
+                    <Route path='teachers' element={<ManageTeachers />} />
                 </Route>
                 <Route path="/teacher" element={<TeacherLayout />}>
                     <Route path="dashboard" element={<TeacherDashboard />} />
