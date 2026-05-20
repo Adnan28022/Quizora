@@ -1,8 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, BookOpen, Star, ArrowRight, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Navigation ke liye import
 
 const AvailableQuizCard = ({ quiz }) => {
+    const navigate = useNavigate(); // Hook initialize kiya
+
+    const handleStartQuiz = () => {
+        // Aapne jo route bataya us par navigate karega
+        navigate('/student/attempt');
+    };
+
     return (
         <motion.div
             whileHover={{ y: -5 }}
@@ -43,7 +51,11 @@ const AvailableQuizCard = ({ quiz }) => {
                 </div>
             </div>
 
-            <button className="w-full py-3.5 bg-slate-900 text-white rounded-xl text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 group-hover:bg-indigo-600 transition-all shadow-lg shadow-slate-200">
+            {/* Start Challenge Button with Navigation */}
+            <button
+                onClick={handleStartQuiz}
+                className="w-full py-3.5 bg-slate-900 text-white rounded-xl text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 group-hover:bg-indigo-600 transition-all shadow-lg shadow-slate-200"
+            >
                 Start Challenge <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>
         </motion.div>

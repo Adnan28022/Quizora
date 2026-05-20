@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Search, User, Menu, PanelLeftClose, PanelLeftOpen, LogOut, Settings, Database, Activity } from 'lucide-react';
-
+import { Link } from 'react-router-dom'
 const AdminHeader = ({ isCollapsed, setIsCollapsed, setMobileSidebar }) => {
     const [profileOpen, setProfileOpen] = useState(false);
     const profileRef = useRef(null);
@@ -68,9 +68,13 @@ const AdminHeader = ({ isCollapsed, setIsCollapsed, setMobileSidebar }) => {
                                 <p className="text-xs font-bold text-slate-800 truncate">admin@quizora.system</p>
                             </div>
                             <div className="space-y-0.5 text-slate-600">
-                                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-bold hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-all"><Database size={16} /> Database Logs</button>
-                                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-bold hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-all"><Activity size={16} /> System Health</button>
-                                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-bold hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-all"><Settings size={16} /> Admin Config</button>
+                                <Link
+                                    to="/admin/system-logs"
+                                    className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-bold hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-all"
+                                >
+                                    <Database size={16} />
+                                    System Logs
+                                </Link>
                             </div>
                             <div className="h-[1px] bg-slate-50 my-1 mx-2"></div>
                             <button className="w-full flex items-center gap-3 px-4 py-3 text-[11px] font-black uppercase text-red-500 hover:bg-red-50 rounded-xl transition-all">
