@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-import { Trophy, TrendingUp, BookOpen, Clock } from 'lucide-react';
+import { Trophy, TrendingUp, BookOpen, Clock, Loader2 } from 'lucide-react';
+import { getProfile } from '../../../redux/reducer/auth/AuthSlice';
 
 const StatCards = () => {
+    const dispatch = useDispatch();
+    const { user, isLoading } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        // Fetch latest points/stats from profile
+        dispatch(getProfile());
+    }, [dispatch]);
+
     const stats = [
-        { label: "Global Rank", val: "#42", icon: <Trophy size={20} />, color: "text-amber-500", bg: "bg-amber-50" },
-        { label: "Average Score", val: "88%", icon: <TrendingUp size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
-        { label: "Quizzes Taken", val: "12", icon: <BookOpen size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
-        { label: "Learning Hours", val: "4.5h", icon: <Clock size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
+        { label: "Total Points", val: user?.totalPoints || 0, icon: <Trophy size={20} />, color: "text-amber-500", bg: "bg-amber-50" },
+        { label: "Success Rate", val: "85%", icon: <TrendingUp size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
+        { label: "Quizzes Taken", val: user?.quizzesAttempted || 0, icon: <BookOpen size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
+        { label: "Learning Level", val: user?.totalPoints > 500 ? "Pro" : "Newbie", icon: <Clock size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
     ];
+
+    if (isLoading) return <div className="flex justify-center p-5"><Loader2 className="animate-spin text-indigo-600" /></div>;
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">

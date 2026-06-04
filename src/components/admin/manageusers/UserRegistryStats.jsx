@@ -1,14 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-import { Users, UserCheck, GraduationCap, UserX } from 'lucide-react';
+import { Users, UserCheck, GraduationCap, UserX, Loader2 } from 'lucide-react';
 
 const UserRegistryStats = () => {
+    const { allUsers, isLoading } = useSelector((state) => state.auth);
+
+    // Dynamic Calculations
+    const totalAccounts = allUsers.length;
+    const activeStudents = allUsers.filter(u => u.role === 'student').length;
+    const expertTeachers = allUsers.filter(u => u.role === 'teacher').length;
+    const pendingApproval = allUsers.filter(u => u.role === 'teacher' && !u.isApproved).length;
+
     const stats = [
-        { label: "Total Accounts", val: "12,650", icon: <Users size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
-        { label: "Active Students", val: "11,200", icon: <UserCheck size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
-        { label: "Expert Teachers", val: "450", icon: <GraduationCap size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
-        { label: "Suspended", val: "12", icon: <UserX size={20} />, color: "text-red-500", bg: "bg-red-50" },
+        { label: "Total Accounts", val: totalAccounts, icon: <Users size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
+        { label: "Active Students", val: activeStudents, icon: <UserCheck size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
+        { label: "Expert Teachers", val: expertTeachers, icon: <GraduationCap size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
+        { label: "Pending Approval", val: pendingApproval, icon: <UserX size={20} />, color: "text-red-500", bg: "bg-red-50" },
     ];
+
+    if (isLoading) return <div className="flex justify-center p-10"><Loader2 className="animate-spin text-indigo-600" /></div>;
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">

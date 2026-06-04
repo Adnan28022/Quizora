@@ -1,11 +1,15 @@
 import React from 'react';
-import { Globe, Lock, FileText, BarChart3 } from 'lucide-react';
+import { Globe, Clock, FileText } from 'lucide-react';
 
-const ManageStats = () => {
+const ManageStats = ({ quizzes }) => {
+    const total = quizzes.length;
+    const live = quizzes.filter(q => q.status === 'approved').length;
+    const pending = quizzes.filter(q => q.status === 'pending').length;
+
     const stats = [
-        { label: "Total Quizzes", val: "24", icon: <FileText size={18} />, color: "bg-slate-100 text-slate-600" },
-        { label: "Live Quizzes", val: "18", icon: <Globe size={18} />, color: "bg-emerald-50 text-emerald-600" },
-        { label: "Draft Content", val: "06", icon: <Lock size={18} />, color: "bg-amber-50 text-amber-600" },
+        { label: "Total Quizzes", val: String(total).padStart(2, '0'), icon: <FileText size={18} />, color: "bg-slate-100 text-slate-600" },
+        { label: "Live Quizzes", val: String(live).padStart(2, '0'), icon: <Globe size={18} />, color: "bg-emerald-50 text-emerald-600" },
+        { label: "Pending Approval", val: String(pending).padStart(2, '0'), icon: <Clock size={18} />, color: "bg-amber-50 text-amber-600" },
     ];
 
     return (

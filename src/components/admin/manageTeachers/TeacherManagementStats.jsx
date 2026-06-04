@@ -2,12 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, UserCheck, Star, BookOpenCheck } from 'lucide-react';
 
-const TeacherManagementStats = () => {
+const TeacherManagementStats = ({ teachers, allQuizzes }) => {
+    const totalTeachers = teachers.length;
+    const verifiedFaculty = teachers.filter(t => t.isApproved).length;
+    const liveQuizzes = allQuizzes.filter(q => q.status === 'approved').length;
+
     const stats = [
-        { label: "Total Educators", val: "450", icon: <GraduationCap size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
-        { label: "Verified Faculty", val: "412", icon: <UserCheck size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
-        { label: "Average Rating", val: "4.85", icon: <Star size={20} />, color: "text-amber-500", bg: "bg-amber-50" },
-        { label: "Quizzes Live", val: "2,840", icon: <BookOpenCheck size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
+        { label: "Total Educators", val: totalTeachers, icon: <GraduationCap size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
+        { label: "Verified Faculty", val: verifiedFaculty, icon: <UserCheck size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
+        { label: "Average Rating", val: "4.8", icon: <Star size={20} />, color: "text-amber-500", bg: "bg-amber-50" }, // Placeholder
+        { label: "Quizzes Live", val: liveQuizzes, icon: <BookOpenCheck size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
     ];
 
     return (

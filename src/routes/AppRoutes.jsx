@@ -32,10 +32,10 @@ import AdminLayout from '../layout/AdminLayout';
 import AdminDashboard from '../pages/admin/Dashboard';
 import ManageUsers from '../pages/admin/ManageUsers';
 import QuizApprovals from '../pages/admin/QuizApprovals';
-import PlatformAnalytics from '../pages/admin/PlatefornAnalytics';
 import ManageTeachers from '../pages/admin/ManageTeachers'
 import SystemLogs from '../pages/admin/SystemLogs';
-import QuizAttempt from '../pages/student/QuizAttempt';
+import QuizPlay from '../pages/student/QuizPlay';
+import ManageCategories from '../pages/admin/ManageCategories';
 const Layout = () => {
     return (
         <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0f1a] transition-colors duration-500">
@@ -67,21 +67,21 @@ const AppRoutes = () => {
                 <Route path="/student" element={<StudentLayout />}>
                     <Route path='dashboard' element={<StudentDashboard />} />
                     <Route path='quizzes' element={<AvailableQuizzes />} />
-                    <Route path='attempt' element={<QuizAttempt />} />
                     <Route path='results' element={<MyResults />} />
                     <Route path='leaderboard' element={<Leaderboard />} />
                     <Route path='awards' element={<Achievements />} />
                     <Route path='profile' element={<Profile />} />
                     <Route path='settings' element={<Settings />} />
+                    <Route path="quiz/attempt/:quizId" element={<QuizPlay />} />
                 </Route>
                 {/* ADMIN DASHBOARD ROUTES */}
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route path="dashboard" element={<AdminDashboard />} />
                     <Route path="users" element={<ManageUsers />} />
                     <Route path="approvals" element={<QuizApprovals />} />
-                    <Route path="analytics" element={<PlatformAnalytics />} />
                     <Route path='teachers' element={<ManageTeachers />} />
                     <Route path='system-logs' element={<SystemLogs />} />
+                    <Route path='categories' element={<ManageCategories />} />
                 </Route>
                 <Route path="/teacher" element={<TeacherLayout />}>
                     <Route path="dashboard" element={<TeacherDashboard />} />

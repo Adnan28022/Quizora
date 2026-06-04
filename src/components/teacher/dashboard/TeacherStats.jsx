@@ -1,13 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookCheck, Users, ClipboardCopy, TrendingUp } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 const TeacherStats = () => {
+    const { quizzes } = useSelector((state) => state.quiz);
+
+    // Aggregating real data
+    const totalQuizzes = quizzes.length;
+    // Note: 'Active Students' is sum of submissions across all quizzes
+    const totalSubmissions = quizzes.reduce((acc, q) => acc + (q.attempts || 0), 0);
+
     const stats = [
-        { label: "Total Quizzes", val: "24", icon: <BookCheck size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
-        { label: "Active Students", val: "1,240", icon: <Users size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
-        { label: "Submissions", val: "8,500", icon: <ClipboardCopy size={20} />, color: "text-amber-500", bg: "bg-amber-50" },
-        { label: "Avg. Success", val: "76%", icon: <TrendingUp size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
+        { label: "Total Quizzes", val: totalQuizzes, icon: <BookCheck size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
+        { label: "Submissions", val: totalSubmissions, icon: <ClipboardCopy size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
+        { label: "Avg. Difficulty", val: "Med", icon: <TrendingUp size={20} />, color: "text-amber-500", bg: "bg-amber-50" },
+        { label: "Avg. Passing", val: "70%", icon: <Users size={20} />, color: "text-purple-600", bg: "bg-purple-50" },
     ];
 
     return (

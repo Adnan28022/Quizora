@@ -2,12 +2,28 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Clock, FileWarning, CheckCircle2 } from 'lucide-react';
 
-const ApprovalMetricsStats = () => {
+const ApprovalMetricsStats = ({ quizzes }) => {
     const stats = [
-        { label: "Pending Review", val: "14", icon: <Clock size={20} />, color: "text-amber-500", bg: "bg-amber-50" },
-        { label: "Approved Today", val: "42", icon: <CheckCircle2 size={20} />, color: "text-emerald-600", bg: "bg-emerald-50" },
-        { label: "Content Flags", val: "03", icon: <FileWarning size={20} />, color: "text-red-500", bg: "bg-red-50" },
-        { label: "Total Certified", val: "2,840", icon: <ShieldCheck size={20} />, color: "text-indigo-600", bg: "bg-indigo-50" },
+        {
+            label: "Pending Review",
+            val: quizzes.filter(q => q.status === 'pending').length,
+            icon: <Clock size={20} />, color: "text-amber-500", bg: "bg-amber-50"
+        },
+        {
+            label: "Approved Quizzes",
+            val: quizzes.filter(q => q.status === 'approved').length,
+            icon: <CheckCircle2 size={20} />, color: "text-emerald-600", bg: "bg-emerald-50"
+        },
+        {
+            label: "Rejected",
+            val: quizzes.filter(q => q.status === 'rejected').length,
+            icon: <FileWarning size={20} />, color: "text-red-500", bg: "bg-red-50"
+        },
+        {
+            label: "Total Database",
+            val: quizzes.length,
+            icon: <ShieldCheck size={20} />, color: "text-indigo-600", bg: "bg-indigo-50"
+        },
     ];
 
     return (

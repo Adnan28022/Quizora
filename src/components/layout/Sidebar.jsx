@@ -1,13 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/reducer/auth/AuthSlice';
 import {
     LayoutDashboard, BookOpen, Trophy, History,
     User, Settings, LogOut, GraduationCap,
-    Star, Target, HelpCircle, X
+    Star, X
 } from 'lucide-react';
 
 const StudentSidebar = ({ isCollapsed, isMobile, setMobileSidebar }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        console.log("Logout Triggered from Header"); // Debugging
+        dispatch(logout());
+        navigate('/auth/login');
+    };
     const studentMenu = [
         { name: "Overview", path: "/student/dashboard", icon: <LayoutDashboard size={18} /> },
         { name: "Available Quizzes", path: "/student/quizzes", icon: <BookOpen size={18} /> },
@@ -69,20 +79,18 @@ const StudentSidebar = ({ isCollapsed, isMobile, setMobileSidebar }) => {
                                 {item.name}
                             </motion.span>
                         )}
-                        {isCollapsed && !isMobile && (
-                            <div className="absolute left-full ml-6 px-3 py-2 bg-slate-800 text-white text-[11px] font-bold rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-all z-50 shadow-2xl border border-slate-700">
-                                {item.name}
-                            </div>
-                        )}
                     </NavLink>
                 ))}
             </nav>
 
             {/* Logout Footer */}
             <div className="p-4 border-t border-white/5 bg-slate-950/20 shrink-0">
-                <button className={`flex items-center gap-4 w-full px-4 py-3 rounded-xl text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-all group relative ${isCollapsed && !isMobile ? 'justify-center' : ''}`}>
+                <button
+                    onClick={handleLogout}
+                    className={`flex items-center gap-4 w-full px-4 py-3 rounded-xl text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-all group relative ${isCollapsed && !isMobile ? 'justify-center' : ''}`}
+                >
                     <LogOut size={20} className="shrink-0 group-hover:rotate-12 transition-transform" />
-                    {!isCollapsed && <span className="text-[13px] font-black uppercase tracking-widest leading-none">Terminate Session</span>}
+                    {!isCollapsed && <span className="text-[13px] font-black uppercase tracking-widest leading-none">Logout</span>}
                 </button>
             </div>
         </motion.aside>

@@ -2,7 +2,6 @@ import React from 'react';
 import WelcomeBanner from '../../components/student/dashboard/WelcomeBanner';
 import StatCards from '../../components/student/dashboard/StatCards';
 import RecentActivity from '../../components/student/dashboard/RecentActivity';
-import GoalCard from '../../components/student/dashboard/GoalCard';
 
 const StudentDashboard = () => {
     return (
@@ -14,15 +13,10 @@ const StudentDashboard = () => {
             <StatCards />
 
             {/* 3. Main Dashboard Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="grid gap-8">
                 {/* Left Side: Recent Activity (8 Columns) */}
-                <div className="lg:col-span-8">
+                <div>
                     <RecentActivity />
-                </div>
-
-                {/* Right Side: Progress Goal (4 Columns) */}
-                <div className="lg:col-span-4">
-                    <GoalCard />
                 </div>
             </div>
 
